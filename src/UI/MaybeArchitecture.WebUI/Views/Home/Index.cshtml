@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model MovieListViewModel
+
+
+<div class="row mb-4">
+    <div class="col-md-3 ml-auto mr-auto text-center">
+        <b>Elapsed Milliseconds : </b> @Model.ElapsedMilliseconds
+        <br />
+        <b>Count of Movie : </b> @Model.Movies.Count.ToString("N0")
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-2 ml-auto mr-auto">
+        <button class="btn btn-primary btn-block">
+            Import
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    @*@foreach (var item in Model.Movies)
+        {
+            <div class="col-2 mb-4">
+
+                <div class="card bg-dark text-white">
+                    <img class="card-img" src="https://image.tmdb.org/t/p/w500/@item.PosterPath" alt="Card image">
+                    <div class="card-img-overlay" style=" background-color: #00000075;">
+                        <h5 class="card-title" style="color: #ffd100;">@item.Title</h5>
+                        <p class="card-text">@item.Overview.Substring(0, Math.Min(item.Overview.Length, 100))</p>
+                    </div>
+                </div>
+            </div>
+        }*@
+</div>
+
+
+@section Scripts {
+    <script>
+        $("button").click(function () {
+
+            $(this).prop("disabled", "true");
+            $(this).html('<span class="spinner-border spinner-border-sm"></span> Importing..');
+
+            //this.setAttribute("disabled", "true");
+            //this.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Importing..';
+
+            $.get("Home/ImportMovie", function (data, status) {
+
+                $("button").removeAttr("disabled");
+
+                $("button").removeClass('btn-primary');
+
+                if (data.isSuccess) {
+                    $("button").html('<span class="btn-label"><i class="fa fa-check"></i></span> Imported');
+                    $("button").addClass('btn-success');
+                }
+                else {
+                    $("button").html('<span class="btn-label"><i class="fa fa-exclamation"></i></span> Import Error');
+                    $("button").addClass('btn-danger');
+                }
+
+                setTimeout(
+                    function () {
+                        $("button").html('Import');
+
+                        $("button").addClass('btn-primary');
+                        $("button").removeClass('btn-success');
+                        $("button").removeClass('btn-danger');
+
+                    }, 2000);
+
+
+            });
+        });
+    </script>
+}
