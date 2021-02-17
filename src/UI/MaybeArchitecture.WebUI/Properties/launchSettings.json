@@ -24,7 +24,7 @@
         "DB_PROVIDER": "Postgre",
         "DB_HOST": "localhost",
         "DB_USER": "postgres",
-        "DB_USER_PASS": "coksecretpassoword",
+        "DB_USER_PASS": "mysecretpassword",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       },
       "dotnetRunMessages": "true",

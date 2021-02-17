@@ -6,6 +6,10 @@
 
 <div class="row mb-4">
     <div class="col-md-3 ml-auto mr-auto text-center">
+        <b>Database Type : </b> @Environment.GetEnvironmentVariable("DB_PROVIDER")
+        <br />
+        <b>Database Host : </b> @Environment.GetEnvironmentVariable("DB_HOST")
+        <br />
         <b>Elapsed Milliseconds : </b> @Model.ElapsedMilliseconds
         <br />
         <b>Count of Movie : </b> @Model.Movies.Count.ToString("N0")
@@ -15,25 +19,32 @@
 <div class="row mb-4">
     <div class="col-md-2 ml-auto mr-auto">
         <button class="btn btn-primary btn-block">
-            Import
+            Import 10K Movie
         </button>
     </div>
 </div>
 
 <div class="row">
-    @*@foreach (var item in Model.Movies)
-        {
-            <div class="col-2 mb-4">
 
-                <div class="card bg-dark text-white">
-                    <img class="card-img" src="https://image.tmdb.org/t/p/w500/@item.PosterPath" alt="Card image">
-                    <div class="card-img-overlay" style=" background-color: #00000075;">
-                        <h5 class="card-title" style="color: #ffd100;">@item.Title</h5>
-                        <p class="card-text">@item.Overview.Substring(0, Math.Min(item.Overview.Length, 100))</p>
-                    </div>
+    @* Boş gözükmesin diye 30 tane film gösteryim bari  *@
+
+    <div class="col-md-12 text-center mb-4">
+        <h2>First 30 Movies</h2>
+    </div>
+
+    @foreach (var item in Model.Movies.Take(30))
+    {
+        <div class="col-2 mb-4">
+
+            <div class="card bg-dark text-white">
+                <img class="card-img" src="https://image.tmdb.org/t/p/w500/@item.PosterPath" alt="Card image">
+                <div class="card-img-overlay" style=" background-color: #00000075;">
+                    <h5 class="card-title" style="color: #ffd100;">@item.Title</h5>
+                    <p class="card-text">@item.Overview.Substring(0, Math.Min(item.Overview.Length, 100))</p>
                 </div>
             </div>
-        }*@
+        </div>
+    }
 </div>
 
 
