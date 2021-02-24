@@ -25,21 +25,6 @@ namespace MaybeArchitecture.Core.Services
 
         public virtual async Task<Response<TDto>> AddAsync(TDto item)
         {
-
-            //var validationResult = Validator.Validate(item);
-
-            //if (!validationResult.IsValid)
-            //{
-            //    return new Response<TDto>
-            //    {
-            //        Data = item,
-            //        IsSuccess = false,
-            //        HasError = true,
-            //        ErrorList = validationResult.Errors.Select(x => x.ErrorMessage).ToList()
-            //    };
-            //}
-
-
             T entity = Mapper.Map<T>(item);
 
             bool result = await Repository.AddAsync(entity);
@@ -133,19 +118,6 @@ namespace MaybeArchitecture.Core.Services
 
         public virtual async Task<Response<TDto>> UpdateAsync(TDto item)
         {
-            //var validationResult = Validator.Validate(item);
-
-            //if (!validationResult.IsValid)
-            //{
-            //    return new Response<TDto>
-            //    {
-            //        Data = item,
-            //        IsSuccess = false,
-            //        HasError = true,
-            //        ErrorList = validationResult.Errors.Select(x => x.ErrorMessage).ToList()
-            //    };
-            //}
-
             T entity = await Repository.GetAsync(item.Id);
 
             if (entity == null)
@@ -157,7 +129,6 @@ namespace MaybeArchitecture.Core.Services
             }
 
             Mapper.Map(item, entity);
-
 
             bool result = await Repository.UpdateAsync(entity);
 

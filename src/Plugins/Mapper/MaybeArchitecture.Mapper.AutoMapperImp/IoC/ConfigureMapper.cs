@@ -9,7 +9,6 @@ namespace MaybeArchitecture.Mapper.AutoMapperImp.IoC
     {
         public static IServiceCollection RegisterMapper(this IServiceCollection services, List<Profile> profiles)
         {
-
             services.AddTransient<IMapper, Mapper>();
 
             MapperConfiguration config = new MapperConfiguration(cfg =>
@@ -18,6 +17,7 @@ namespace MaybeArchitecture.Mapper.AutoMapperImp.IoC
             });
 
             services.AddSingleton(config.CreateMapper());
+
             Console.WriteLine("Auto Mapper Registered");
 
             return services;
